@@ -10,18 +10,18 @@
 
 --VeryLightGray: hsl(0, 0%, 98%);
 --VeryLighGrayishBlue: hsl(236, 33%, 92%);
---LightGrayishBlue: hsl(233, 11%, 84%);
---DarkGrayishBlue: hsl(236, 9%, 61%);
---VeryDarkrayishBlue: hsl(235, 19%, 35%);
+--LightGrayishBlueLM: hsl(233, 11%, 84%);
+--DarkGrayishBlueLM: hsl(236, 9%, 61%);
+--VeryDarkrayishBlueLM: hsl(235, 19%, 35%);
 
 /* ### Dark Theme */
 
---VeryDarklue: hsl(235, 21%, 11%);
+--VeryDarkBlue: hsl(235, 21%, 11%);
 --VeryDarkesaturatedBlue: hsl(235, 24%, 19%);
 --LightGrayishBlue: hsl(234, 39%, 85%);
 --LightGrayishBluehover: hsl(236, 33%, 92%);
 --DarkGrayishBlue: hsl(234, 11%, 52%);
---VeryDarkrayishBlue: hsl(233, 14%, 35%);
+/* --VeryDarkrayishBlue: hsl(233, 14%, 35%); */
 --VeryDarkrayishBlue: hsl(237, 14%, 26%);
 
 /* ## Typography */
@@ -60,22 +60,24 @@
   }
   
 /*----------------background Image top-------*/
-.bg-image-light{
-    background-image: url('/images/bg-mobile-light.jpg');
+
+
+.bg-image-light.show{
+    background-image: url('../images/bg-mobile-light.jpg');
     background-repeat: no-repeat;
     width: 100%;
     height:100%;
     overflow: hidden;
 }
 
-.bg-image-dark{
-    background-image: url('/images/bg-mobile-dark.jpg');
+.bg-image-dark.show{
+    background-image: url('../images/bg-mobile-dark.jpg');
     background-repeat: no-repeat;
     width: 100%;
     height:100%;
     overflow: hidden;
-    display: none;
 }
+
 
 /*--------central elements-----*/
 
@@ -106,15 +108,35 @@
 }
 
 
-.moon,
-.sun {
-    background-image: url('/images/icon-moon.svg');
+.moon.show {
+    background-image: url('../images/icon-moon.svg');
     background-repeat: no-repeat;
-    position: absolute;
     width: 30px;
     height: 30px;
+    position: absolute;
     top: 40px;
     right: 20px;
+    cursor: pointer;
+    display: flex;
+}
+
+.sun {
+    display: none;
+}
+.sun.show {
+    background-image: url('../images/icon-sun.svg');
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    cursor: pointer;
+    display: flex;
+}
+
+.moon {
+   display: none;
 }
 
 .new-todo{
@@ -127,8 +149,16 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
+    cursor: pointer;
+    transition: tranform 0.2s;
 }
 
+.new-todo:hover,
+.todo-list:hover,
+.todo-menu:hover,
+.todo-list-completed:hover {
+    transform: scale(.95);
+}
 
 .todo-menu {
     background-color: white;
@@ -140,6 +170,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;  
+    margin-top: 2px;
+    transition: tranform 0.2s;
 }
 
 .list-items{
@@ -147,22 +179,23 @@
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    color:var(--DarkGrayishBlue);
+    color:var(--DarkGrayishBlueLM);
+    margin: 0 auto;
 }
 
 .todo-txt{
     display: block;
     position: absolute;
     align-self: center;   
-    left:60px;
-    font-size: 13px;
-    color:var(--DarkrayishBlue);    
+    left:50px;
+    font-size: 14px;
+    color:var(--DarkrayishBlueLM);    
 }
 
 .todo-txt-left,
 .todo-txt-completed{
     font-size: 13px;
-    color:var(--DarkGrayishBlue);
+    color:var(--DarkGrayishBlueLM);
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -266,9 +299,21 @@
     height:60px;
     border-radius: 5px;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-around;    
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2px;
+    transition: tranform 0.2s;
 }
+
+.cross {
+ background-image: url(../images/icon-cross.svg);
+ width:20px;
+ height:20px;
+ background-repeat: no-repeat;
+    right: 20px;
+    position: absolute;
+}   
+
 .todo-list-completed{
     background-color: white;
     position: relative;
@@ -277,7 +322,9 @@
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-between;    
+    justify-content: space-between;   
+    margin-top: 2px; 
+    transition: tranform 0.2s;
 }
 
 
@@ -285,7 +332,7 @@
     .attribution a { color: hsl(228, 45%, 44%); }
 
     @media (min-width: 376px){
-        .bg-image-light{
+        .bg-image-light.show{
             background-image: url('../images/bg-desktop-light.jpg');
             background-repeat: no-repeat;
             width: 100%;
@@ -294,12 +341,12 @@
         }
 
 
-        .bg-image-dark{
-            background-image: url('/images/bg-desktop-dark.jpg');
+        .bg-image-dark.show{
+            background-image: url('../images/bg-desktop-dark.jpg');
             background-repeat: no-repeat;
             width: 100%;
             height:300px;
-            display: none;
-}
+            
+        }
         
     }
