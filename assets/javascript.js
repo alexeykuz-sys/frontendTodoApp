@@ -3,6 +3,8 @@ const MOON = document.getElementById('moon');
 const BGIMGLIGHT = document.getElementById('bg-image-light');
 const BGIMGDARK = document.getElementById('bg-image-dark')
 const CROSS = document.querySelectorAll('.cross')
+const CHECKBOX = document.querySelectorAll("input[name=checkbox]");
+
 
 function lightDarkModeChanger (){
     if(MOON.classList.contains('show')){
@@ -90,24 +92,30 @@ function lightCardMode(){
 
 function remove() {
     this.parentNode.parentNode.removeChild(this.parentNode);
-    
-  }
-  
-  function add() {
-    this.parentNode.parentNode.appendChild(this.parentNode);
-    
+    console.log(this, this.parentNode)
   }
 
   var element = document.querySelectorAll('.todo-list');  
-  for (var i = 0, len = element.length; i < len; i++) {
-    CROSS[i].addEventListener('click', remove, false);
+  for (var i = 0; i < element.length; i++) {
+    CROSS[i].addEventListener('click', remove);
   }
 
-
-  var element = document.querySelectorAll('.todo-list');  
-  for (var i = 0, len = element.length; i < len; i++) {
-    CROSS.addEventListener('click', add, false);
-  }
+////checkbox mark completed TODOs///
+function completedTodo(){
+    for(i=0;i<CHECKBOX.length; i++){
+        CHECKBOX[i].addEventListener('change', e => {
+            if (e.target.checked) {
+                document.querySelector('.todo-txt').style.textDecoration = 'line-through'
+                console.log(e.target)
+            } else {
+                document.querySelector('.todo-txt').style.textDecoration = 'none'
+            }
+        });
+    }
+}
+completedTodo()
+    
+    
 // function newTodo(){
 // // add new elements to DOM////////
 // // Get the element you want to add your new element before or after
