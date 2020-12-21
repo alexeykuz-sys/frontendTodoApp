@@ -2,12 +2,12 @@ const SUN = document.getElementById('sun');
 const MOON = document.getElementById('moon');
 const BGIMGLIGHT = document.getElementById('bg-image-light');
 const BGIMGDARK = document.getElementById('bg-image-dark')
+const CROSS = document.querySelectorAll('.cross')
 
 function lightDarkModeChanger (){
     if(MOON.classList.contains('show')){
         MOON.classList.remove('show')
-        SUN.classList.remove('none')
-        SUN.classList.add('show')
+        SUN.classList.toggle('show')
         bgImgHandler()
         bodyColorChange()
         darkCardMode()
@@ -15,8 +15,7 @@ function lightDarkModeChanger (){
         
     } else if (SUN.classList.contains('show')){
         SUN.classList.remove('show')
-        MOON.classList.remove('none')
-        MOON.classList.add('show')
+        MOON.classList.toggle('show')
         bgImgHandler()
         bodyColorChange()
         lightCardMode()
@@ -68,7 +67,7 @@ function changeColors(selectors, color){
 function changeTextColors(selectors, color){
     selectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
-        console.log(elements)
+        console.log(selector)
         for( i=0; i<elements.length; i++){
         elements[i].style.color = color
         }
@@ -85,3 +84,60 @@ function lightCardMode(){
     changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryLightGray)']);
     changeTextColors(['.todo-txt'],['var(--DarkrayishBlueLM']);
 }
+
+// // remove elements to DOM////////
+
+
+function remove() {
+    this.parentNode.parentNode.removeChild(this.parentNode);
+    
+  }
+  
+  function add() {
+    this.parentNode.parentNode.appendChild(this.parentNode);
+    
+  }
+
+  var element = document.querySelectorAll('.todo-list');  
+  for (var i = 0, len = element.length; i < len; i++) {
+    CROSS[i].addEventListener('click', remove, false);
+  }
+
+
+  var element = document.querySelectorAll('.todo-list');  
+  for (var i = 0, len = element.length; i < len; i++) {
+    CROSS.addEventListener('click', add, false);
+  }
+// function newTodo(){
+// // add new elements to DOM////////
+// // Get the element you want to add your new element before or after
+// var tree = document.createDocumentFragment();
+// var target = document.querySelector('#new-todo');
+
+// // Create the new element
+// // This can be any valid HTML element: p, article, span, etc...
+// var div = document.createElement('div');
+// var classAtr = div.setAttribute("class", "todo-list");
+// var div
+
+
+// // Add content to the new element
+// div.innerHTML = 'Your content, markup, etc.';
+
+// // You could also add classes, IDs, and so on
+// // div is a fully manipulatable DOM Node
+
+// // Insert the element before our target element
+// target.parentNode.insertBefore( div, target );
+
+// // Insert the element after our target element
+// // target.parentNode.insertBefore( div, target.nextSibling );
+
+// }
+// // delete elements marked as a complete //
+
+
+
+
+   
+

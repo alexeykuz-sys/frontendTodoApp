@@ -118,6 +118,7 @@
     right: 20px;
     cursor: pointer;
     display: flex;
+    transition: tranform 0.2s;
 }
 
 .sun {
@@ -133,6 +134,7 @@
     right: 20px;
     cursor: pointer;
     display: flex;
+    transition: tranform 0.2s;
 }
 
 .moon {
@@ -157,7 +159,10 @@
 .todo-list:hover,
 .todo-menu:hover,
 .todo-list-completed:hover {
-    transform: scale(.95);
+    transform: scale(1.05);
+    box-shadow: -5px -5px 10px rgba(99, 92, 92, 0.5),
+    5px 5px 10px rgba(48, 47, 47, 0.63);
+    z-index: 100;
 }
 
 .todo-menu {
