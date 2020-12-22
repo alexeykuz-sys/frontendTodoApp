@@ -3,8 +3,8 @@ const MOON = document.getElementById('moon');
 const BGIMGLIGHT = document.getElementById('bg-image-light');
 const BGIMGDARK = document.getElementById('bg-image-dark')
 const CROSS = document.querySelectorAll('.cross')
-const CHECKBOX = document.querySelectorAll("input[name=checkbox]");
-console.log(CHECKBOX)
+const checkboxes = document.querySelectorAll("input[name=checkbox]");
+
 
 
 
@@ -103,30 +103,17 @@ function remove() {
 
 ////checkbox mark completed TODOs///
 
-const elementText = document.querySelectorAll('.todo-txt');  
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
+  const parent = checkbox.parentElement.nextElementSibling;
+  console.log(parent, checkbox)
+  if (checkbox.checked) {
+    parent.style.textDecoration = 'line-through';
+  }
+  else parent.style.textDecoration = 'none';
+}));
 
-function completedTodo(){
-    for(i=0; i<CHECKBOX.length; i++){
-        CHECKBOX[i].addEventListener('change', e => {
-            console.log(elementText)
-            for (var i = 0; i < elementText.length; i++) {
-                let targets = e.target;
-                console.log(elementText[i], targets)
-               targets.forEach(target =>{
-                if (target.checked) {
-                console.log(target)
-                elementText[i].style.textDecoration = 'line-through'
-            } else {
-                elementText[i].style.textDecoration = 'none'
-            }
-        })
-        }
-        });
-    }
-}
-completedTodo()
-    
-    
+
+
 // function newTodo(){
 // // add new elements to DOM////////
 // // Get the element you want to add your new element before or after
