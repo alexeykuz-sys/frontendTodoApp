@@ -59,7 +59,6 @@ function bodyColorChange(){
 function changeColors(selectors, color){
     selectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
-        console.log(elements)
         for(let i=0; i<elements.length; i++){
         elements[i].style.backgroundColor = color
         }
@@ -71,7 +70,6 @@ function changeColors(selectors, color){
 function changeTextColors(selectors, color){
     selectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
-        console.log(selector)
         for( i=0; i<elements.length; i++){
         elements[i].style.color = color
         }
@@ -94,11 +92,12 @@ function lightCardMode(){
 
 function remove() {
     this.parentNode.parentNode.removeChild(this.parentNode);
-  }
+}
 
   var element = document.querySelectorAll('.todo-list');  
   for (var i = 0; i < element.length; i++) {
     CROSS[i].addEventListener('click', remove);
+    
   }
 
 ////checkbox mark completed TODOs///
@@ -108,11 +107,18 @@ checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
   console.log(parent, checkbox)
   if (checkbox.checked) {
     parent.style.textDecoration = 'line-through';
+    console.log(parent)
   }
   else parent.style.textDecoration = 'none';
 }));
 
-
+// Elements counts//
+function elementCount(){
+let number = document.getElementById('items-left');
+let completedItemsCount = document.getElementById('central-elements').childElementCount;
+number.childNodes[0].textContent = completedItemsCount
+}
+elementCount()
 
 // function newTodo(){
 // // add new elements to DOM////////
