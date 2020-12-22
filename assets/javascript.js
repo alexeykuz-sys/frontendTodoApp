@@ -4,6 +4,8 @@ const BGIMGLIGHT = document.getElementById('bg-image-light');
 const BGIMGDARK = document.getElementById('bg-image-dark')
 const CROSS = document.querySelectorAll('.cross')
 const CHECKBOX = document.querySelectorAll("input[name=checkbox]");
+console.log(CHECKBOX)
+
 
 
 function lightDarkModeChanger (){
@@ -92,7 +94,6 @@ function lightCardMode(){
 
 function remove() {
     this.parentNode.parentNode.removeChild(this.parentNode);
-    console.log(this, this.parentNode)
   }
 
   var element = document.querySelectorAll('.todo-list');  
@@ -101,15 +102,25 @@ function remove() {
   }
 
 ////checkbox mark completed TODOs///
+
+const elementText = document.querySelectorAll('.todo-txt');  
+
 function completedTodo(){
-    for(i=0;i<CHECKBOX.length; i++){
+    for(i=0; i<CHECKBOX.length; i++){
         CHECKBOX[i].addEventListener('change', e => {
-            if (e.target.checked) {
-                document.querySelector('.todo-txt').style.textDecoration = 'line-through'
-                console.log(e.target)
+            console.log(elementText)
+            for (var i = 0; i < elementText.length; i++) {
+                let targets = e.target;
+                console.log(elementText[i], targets)
+               targets.forEach(target =>{
+                if (target.checked) {
+                console.log(target)
+                elementText[i].style.textDecoration = 'line-through'
             } else {
-                document.querySelector('.todo-txt').style.textDecoration = 'none'
+                elementText[i].style.textDecoration = 'none'
             }
+        })
+        }
         });
     }
 }
