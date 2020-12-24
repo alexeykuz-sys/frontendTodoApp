@@ -101,24 +101,60 @@ function remove() {
   }
 
 ////checkbox mark completed TODOs///
-
+let count = 0
+function clickedBoxes(){
 checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
+
   const parent = checkbox.parentElement.nextElementSibling;
-  console.log(parent, checkbox)
   if (checkbox.checked) {
     parent.style.textDecoration = 'line-through';
-    console.log(parent)
-  }
-  else parent.style.textDecoration = 'none';
-}));
+    
+  count = document.querySelectorAll('input[type="checkbox"]:checked').length
+  elementCount()
+   console.log(count)
+    }
+  
+  else parent.style.textDecoration = 'none';  
+  count = document.querySelectorAll('input[type="checkbox"]:checked').length
+  elementCount() 
 
-// Elements counts//
-function elementCount(){
-let number = document.getElementById('items-left');
-let completedItemsCount = document.getElementById('central-elements').childElementCount;
-number.childNodes[0].textContent = completedItemsCount
+}));
+}
+clickedBoxes()
+// alert(document.querySelectorAll('input[type="checkbox"]:checked').length)
+
+// //Elements counts//   
+
+
+function elementCount(){    
+    let number = document.getElementById('items-left');
+    let todoItemsCount = document.getElementById('central-elements').childElementCount;
+    let x = count
+    console.log(x, count)
+    number.childNodes[0].textContent = todoItemsCount - count
+
 }
 elementCount()
+
+// function elementCount(){
+  
+//     checkboxes.forEach(checkbox => checkbox.addEventListener('click', event => {
+//         let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+//         console.log(checkbox.checked)
+//         let number = document.getElementById('items-left');
+//         let todoItemsCount = document.getElementById('central-elements').childElementCount;
+//     let count = 0
+    
+//     for(i=0; i< checkedBoxes.length; i++){
+//         count++ 
+//     }
+//     console.log( count)
+//     console.log(todoItemsCount)
+//     number.childNodes[0].textContent = todoItemsCount-count
+// }))
+
+// }
+// elementCount()
 
 // function newTodo(){
 // // add new elements to DOM////////
