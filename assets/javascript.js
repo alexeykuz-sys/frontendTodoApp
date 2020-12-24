@@ -4,7 +4,7 @@ const BGIMGLIGHT = document.getElementById('bg-image-light');
 const BGIMGDARK = document.getElementById('bg-image-dark')
 const CROSS = document.querySelectorAll('.cross')
 const checkboxes = document.querySelectorAll("input[name=checkbox]");
-
+const CLEAR = document.getElementById('clear-completed')
 
 
 
@@ -77,14 +77,27 @@ function changeTextColors(selectors, color){
 
 }
 
+
+function changeCrossColors(selectors){
+    selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        for( i=0; i<elements.length; i++){
+        elements[i].setAttribute('fill','red')
+        }
+    })
+
+}
+
 function darkCardMode(){
     changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryDarkrayishBlueLM)'])
    changeTextColors(['.todo-txt'], ['var(--VeryLightGray'])
+   changeCrossColors(['.cross'])
 }
 
 function lightCardMode(){
     changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryLightGray)']);
     changeTextColors(['.todo-txt'],['var(--DarkrayishBlueLM']);
+    changeCrossColors(['.cross'])
 }
 
 // // remove elements to DOM////////
@@ -96,12 +109,14 @@ function remove() {
 
   var element = document.querySelectorAll('.todo-list');  
   for (var i = 0; i < element.length; i++) {
+      console.log(element[i])
     CROSS[i].addEventListener('click', remove);
-    
   }
 
+
+
 ////checkbox mark completed TODOs///
-let count = 0
+let cocompletedToDO = 0
 function clickedBoxes(){
 checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
 
@@ -109,52 +124,32 @@ checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
   if (checkbox.checked) {
     parent.style.textDecoration = 'line-through';
     
-  count = document.querySelectorAll('input[type="checkbox"]:checked').length
+  cocompletedToDO = document.querySelectorAll('input[type="checkbox"]:checked').length
+  console.log(cocompletedToDO)
   elementCount()
-   console.log(count)
+  
     }
   
   else parent.style.textDecoration = 'none';  
-  count = document.querySelectorAll('input[type="checkbox"]:checked').length
+  cocompletedToDO = document.querySelectorAll('input[type="checkbox"]:checked').length
   elementCount() 
 
 }));
 }
 clickedBoxes()
-// alert(document.querySelectorAll('input[type="checkbox"]:checked').length)
+
+
+
 
 // //Elements counts//   
 
 
-function elementCount(){    
+function elementCount(){
     let number = document.getElementById('items-left');
     let todoItemsCount = document.getElementById('central-elements').childElementCount;
-    let x = count
-    console.log(x, count)
-    number.childNodes[0].textContent = todoItemsCount - count
-
+    number.childNodes[0].textContent = todoItemsCount - cocompletedToDO
 }
 elementCount()
-
-// function elementCount(){
-  
-//     checkboxes.forEach(checkbox => checkbox.addEventListener('click', event => {
-//         let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
-//         console.log(checkbox.checked)
-//         let number = document.getElementById('items-left');
-//         let todoItemsCount = document.getElementById('central-elements').childElementCount;
-//     let count = 0
-    
-//     for(i=0; i< checkedBoxes.length; i++){
-//         count++ 
-//     }
-//     console.log( count)
-//     console.log(todoItemsCount)
-//     number.childNodes[0].textContent = todoItemsCount-count
-// }))
-
-// }
-// elementCount()
 
 // function newTodo(){
 // // add new elements to DOM////////
