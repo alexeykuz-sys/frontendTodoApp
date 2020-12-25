@@ -78,26 +78,26 @@ function changeTextColors(selectors, color){
 }
 
 
-function changeCrossColors(selectors){
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        for( i=0; i<elements.length; i++){
-        elements[i].setAttribute('fill','red')
-        }
-    })
+// function changeCrossColors(selectors){
+//     selectors.forEach(selector => {
+//         const elements = document.querySelectorAll(selector);
+//         for( i=0; i<elements.length; i++){
+//         elements[i].setAttribute('fill','red')
+//         }
+//     })
 
-}
+// }
 
 function darkCardMode(){
     changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryDarkrayishBlueLM)'])
    changeTextColors(['.todo-txt'], ['var(--VeryLightGray'])
-   changeCrossColors(['.cross'])
+ 
 }
 
 function lightCardMode(){
     changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryLightGray)']);
     changeTextColors(['.todo-txt'],['var(--DarkrayishBlueLM']);
-    changeCrossColors(['.cross'])
+  
 }
 
 // // remove elements to DOM////////
@@ -105,10 +105,12 @@ function lightCardMode(){
 
 function remove() {
     this.parentNode.parentNode.removeChild(this.parentNode);
+    console.log(this.parentNode)
 }
 
   var element = document.querySelectorAll('.todo-list');  
   for (var i = 0; i < element.length; i++) {
+
       console.log(element[i])
     CROSS[i].addEventListener('click', remove);
   }
