@@ -1,188 +1,140 @@
-const SUN = document.getElementById('sun');
-const MOON = document.getElementById('moon');
-const BGIMGLIGHT = document.getElementById('bg-image-light');
-const BGIMGDARK = document.getElementById('bg-image-dark')
-const CROSS = document.querySelectorAll('.cross')
+const SUN = document.getElementById("sun");
+const MOON = document.getElementById("moon");
+const BGIMGLIGHT = document.getElementById("bg-image-light");
+const BGIMGDARK = document.getElementById("bg-image-dark");
+const CROSS = document.querySelectorAll(".cross");
 const checkboxes = document.querySelectorAll("input[name=checkbox]");
-const CLEAR = document.getElementById('clear-completed')
+const CLEAR = document.getElementById("clear-completed");
+const ALL = document.querySelector("#all");
+const ACTIVE = document.getElementById("active");
+const COMPLETED = document.getElementById("completed");
+const TODOLIST = document.querySelectorAll(".todo-list");
 
-
-
-function lightDarkModeChanger (){
-    if(MOON.classList.contains('show')){
-        MOON.classList.remove('show')
-        SUN.classList.toggle('show')
-        bgImgHandler()
-        bodyColorChange()
-        darkCardMode()
-        changeTextColors()
-        
-    } else if (SUN.classList.contains('show')){
-        SUN.classList.remove('show')
-        MOON.classList.toggle('show')
-        bgImgHandler()
-        bodyColorChange()
-        lightCardMode()
-        changeTextColors()
-    }
-}
-
-MOON.addEventListener('click', lightDarkModeChanger)
-SUN.addEventListener('click', lightDarkModeChanger)
-
-function bgImgHandler(){
-    if(MOON.classList.contains('show')){
-        BGIMGLIGHT.classList.remove('show')
-        BGIMGDARK.classList.remove('none')
-        BGIMGDARK.classList.add('show')
-        
-    } else if (SUN.classList.contains('show')){
-        BGIMGDARK.classList.add('none')
-        BGIMGDARK.classList.remove('show')
-        BGIMGLIGHT.classList.add('show')
-       
-    }
-}
-
-
-function bodyColorChange(){
-    if(MOON.classList.contains('show')){
-        document.body.style.backgroundColor = 'var(--VeryLighGrayishBlue)';
-       
-        
-    } else if (SUN.classList.contains('show')){
-        document.body.style.backgroundColor = 'var(--VeryDarkrayishBlue2)';
-      
-    }
-}
-
-function changeColors(selectors, color){
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        for(let i=0; i<elements.length; i++){
-        elements[i].style.backgroundColor = color
-        }
-    });
-
-}
-
-
-function changeTextColors(selectors, color){
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        for( i=0; i<elements.length; i++){
-        elements[i].style.color = color
-        }
-    })
-
-}
-
-
-// function changeCrossColors(selectors){
-//     selectors.forEach(selector => {
-//         const elements = document.querySelectorAll(selector);
-//         for( i=0; i<elements.length; i++){
-//         elements[i].setAttribute('fill','red')
-//         }
-//     })
-
-// }
-
-function darkCardMode(){
-    changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryDarkrayishBlueLM)'])
-   changeTextColors(['.todo-txt'], ['var(--VeryLightGray'])
- 
-}
-
-function lightCardMode(){
-    changeColors(['.new-todo','.todo-list', '.todo-list-completed', '.todo-menu'], ['var(--VeryLightGray)']);
-    changeTextColors(['.todo-txt'],['var(--DarkrayishBlueLM']);
-  
-}
-
-// // remove elements to DOM////////
-
-
-function remove() {
-    this.parentNode.parentNode.removeChild(this.parentNode);
-    console.log(this.parentNode)
-}
-
-  var element = document.querySelectorAll('.todo-list');  
-  for (var i = 0; i < element.length; i++) {
-
-      console.log(element[i])
-    CROSS[i].addEventListener('click', remove);
+function lightDarkModeChanger() {
+  if (MOON.classList.contains("show")) {
+    MOON.classList.remove("show");
+    SUN.classList.toggle("show");
+    bgImgHandler();
+    bodyColorChange();
+    darkCardMode();
+    changeTextColors();
+  } else if (SUN.classList.contains("show")) {
+    SUN.classList.remove("show");
+    MOON.classList.toggle("show");
+    bgImgHandler();
+    bodyColorChange();
+    lightCardMode();
+    changeTextColors();
   }
+}
 
+MOON.addEventListener("click", lightDarkModeChanger);
+SUN.addEventListener("click", lightDarkModeChanger);
 
+function bgImgHandler() {
+  if (MOON.classList.contains("show")) {
+    BGIMGLIGHT.classList.remove("show");
+    BGIMGDARK.classList.remove("none");
+    BGIMGDARK.classList.add("show");
+  } else if (SUN.classList.contains("show")) {
+    BGIMGDARK.classList.add("none");
+    BGIMGDARK.classList.remove("show");
+    BGIMGLIGHT.classList.add("show");
+  }
+}
+
+function bodyColorChange() {
+  if (MOON.classList.contains("show")) {
+    document.body.style.backgroundColor = "var(--VeryLighGrayishBlue)";
+  } else if (SUN.classList.contains("show")) {
+    document.body.style.backgroundColor = "var(--VeryDarkrayishBlue2)";
+  }
+}
+
+function changeColors(selectors, color) {
+  selectors.forEach((selector) => {
+    const elements = document.querySelectorAll(selector);
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.backgroundColor = color;
+    }
+  });
+}
+
+function changeTextColors(selectors, color) {
+  selectors.forEach((selector) => {
+    const elements = document.querySelectorAll(selector);
+    for (i = 0; i < elements.length; i++) {
+      elements[i].style.color = color;
+    }
+  });
+}
+
+function darkCardMode() {
+  changeColors(
+    [".new-todo", ".todo-list", ".todo-list-completed", ".todo-menu"],
+    ["var(--VeryDarkrayishBlueLM)"]
+  );
+  changeTextColors([".todo-txt"], ["var(--VeryLightGray"]);
+}
+
+function lightCardMode() {
+  changeColors(
+    [".new-todo", ".todo-list", ".todo-list-completed", ".todo-menu"],
+    ["var(--VeryLightGray)"]
+  );
+  changeTextColors([".todo-txt"], ["var(--DarkrayishBlueLM"]);
+}
 
 ////checkbox mark completed TODOs///
-let cocompletedToDO = 0
-function clickedBoxes(){
-checkboxes.forEach(checkbox => checkbox.addEventListener('change', event => {
-
-  const parent = checkbox.parentElement.nextElementSibling;
-  if (checkbox.checked) {
-    parent.style.textDecoration = 'line-through';
-    
-  cocompletedToDO = document.querySelectorAll('input[type="checkbox"]:checked').length
-  console.log(cocompletedToDO)
-  elementCount()
-  
-    }
-  
-  else parent.style.textDecoration = 'none';  
-  cocompletedToDO = document.querySelectorAll('input[type="checkbox"]:checked').length
-  elementCount() 
-
-}));
+let completedToDO = 0;
+function clickedBoxes() {
+  checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("change", (event) => {
+      const parent = checkbox.parentElement.nextElementSibling;
+      if (checkbox.checked) {
+        parent.style.textDecoration = "line-through";
+        completedToDO = document.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        ).length;
+        elementCount();
+      } else parent.style.textDecoration = "none";
+      completedToDO = document.querySelectorAll(
+        'input[type="checkbox"]:checked'
+      ).length;
+      elementCount();
+    })
+  );
 }
-clickedBoxes()
+clickedBoxes();
 
+// remove elements to DOM////////
 
-
-
-// //Elements counts//   
-
-
-function elementCount(){
-    let number = document.getElementById('items-left');
-    let todoItemsCount = document.getElementById('central-elements').childElementCount;
-    number.childNodes[0].textContent = todoItemsCount - cocompletedToDO
+removedToDo = [];
+function remove() {
+  this.parentNode.parentNode.removeChild(this.parentNode);
+  removedToDo.push(this.parentNode);
+  console.log(this.parentNode, removedToDo);
+  elementCount();
 }
-elementCount()
 
-// function newTodo(){
-// // add new elements to DOM////////
-// // Get the element you want to add your new element before or after
-// var tree = document.createDocumentFragment();
-// var target = document.querySelector('#new-todo');
+for (let i = 0; i < TODOLIST.length; i++) {
+  CROSS[i].addEventListener("click", remove);
+}
 
-// // Create the new element
-// // This can be any valid HTML element: p, article, span, etc...
-// var div = document.createElement('div');
-// var classAtr = div.setAttribute("class", "todo-list");
-// var div
+// //Elements counts//
 
+function elementCount() {
+  let number = document.getElementById("items-left");
 
-// // Add content to the new element
-// div.innerHTML = 'Your content, markup, etc.';
+  let todoItemsCount = document.getElementById("central-elements")
+    .childElementCount;
+  number.childNodes[0].textContent = todoItemsCount - completedToDO;
+}
+elementCount();
 
-// // You could also add classes, IDs, and so on
-// // div is a fully manipulatable DOM Node
+function clearCompleted() {
+  completedToDO = document.querySelectorAll('input[type="checkbox"]:checked');
+  console.log(completedToDO);
+}
 
-// // Insert the element before our target element
-// target.parentNode.insertBefore( div, target );
-
-// // Insert the element after our target element
-// // target.parentNode.insertBefore( div, target.nextSibling );
-
-// }
-// // delete elements marked as a complete //
-
-
-
-
-   
-
+CLEAR.addEventListener("click", remove);

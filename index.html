@@ -31,75 +31,90 @@
       <div class="sun" id="sun"></div>
       <div class="new-todo" id="new-todo">
         <label class="checkbox-container">
-          <input type="checkbox" name="checkbox" >
+          <input type="checkbox" name="checkbox" />
           <span class="checkmark"></span>
         </label>
-        <input type="text" class="todo-txt" id="todo-txt" value="Create a new ...">
+        <input
+          type="text"
+          class="todo-txt"
+          id="todo-txt"
+          value="Create a new ..."
+        />
       </div>
     </div>
-      <div class="cental-elements-wrapper" id="central-elements">
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">Complete online JavaScript Course</div>
-          <div class="cross"></div>
+    <div class="cental-elements-wrapper" id="central-elements">
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">Complete online JavaScript Course</div>
+        <div class="cross"></div>
+      </div>
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">Jog around the park 3x</div>
+        <div class="cross"></div>
+      </div>
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">10 minutes meditation</div>
+        <div class="cross"></div>
+      </div>
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">Read for 1 hour</div>
+        <div class="cross"></div>
+      </div>
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">Pick up groceries</div>
+        <div class="cross"></div>
+      </div>
+      <div class="todo-list" data-show="true">
+        <label class="checkbox-container">
+          <input type="checkbox" name="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <div class="todo-txt">Complete Todo App on Frontend Mentor</div>
+        <div class="cross"></div>
+      </div>
+    </div>
+    <div class="bottom-elements">
+      <div class="todo-list-completed">
+        <div class="todo-txt-left" id="items-left">
+          <span id="number"></span> items left
         </div>
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">Jog around the park 3x</div>
-          <div class="cross"></div>
-        </div>
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">10 minutes meditation</div>
-          <div class="cross"></div>
-        </div>
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">Read for 1 hour</div>
-          <div class="cross"></div>
-        </div>
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">Pick up groceries</div>
-          <div class="cross"></div>
-        </div>
-        <div class="todo-list">
-          <label class="checkbox-container">
-            <input type="checkbox" name="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <div class="todo-txt">Complete Todo App on Frontend Mentor</div>
-          <div class="cross"></div>
+        <div class="todo-txt-completed" id="clear-completed">
+          Clear Completed
         </div>
       </div>
-      <div class="bottom-elements">
-          <div class="todo-list-completed">
-            <div class="todo-txt-left" id="items-left"><span id="number"></span> items left</div>
-            <div class="todo-txt-completed" id="clear-completed">Clear Completed</div>
-          </div>
-          <div class="todo-menu">
-            <li class="list-items">
-              <ul class="todo-menu-txt">All</ul>
-              <ul class="todo-menu-txt">Active</ul>
-              <ul class="todo-menu-txt">Completed</ul>
-            </li>
-          </div>
+      <div class="todo-menu">
+        <li class="list-items">
+          <ul class="todo-menu-txt" id="all">
+            All
+          </ul>
+          <ul class="todo-menu-txt" id="active">
+            Active
+          </ul>
+          <ul class="todo-menu-txt" id="completed">
+            Completed
+          </ul>
+        </li>
       </div>
+    </div>
     <!-- Add dynamic number -->
 
     <div class="attribution">
