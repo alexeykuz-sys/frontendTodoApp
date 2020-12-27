@@ -85,19 +85,62 @@ function lightCardMode() {
   changeTextColors([".todo-txt"], ["var(--DarkrayishBlueLM"]);
 }
 
+
+
+
+// Create a new list item when clicking on 'Enter' button
+function newElement(divTodo) {
+    let divToDo = document.createElement("div");
+   
+    let divTxt = document.createElement('div');
+    let labelRef = document.createElement('label');
+    let inputRef = document.createElement('input');
+    let spanRef = document.createElement('span');
+    let divCross = document.createElement('div');
+    divToDo.className = 'todo-list'
+    divTxt.className = 'todo-txt'
+    divCross.className = 'cross'
+    labelRef.className = 'checkbox-container'
+    spanRef.className = 'checkmark'
+    inputRef.type = 'checkbox'
+    inputRef.name = 'checkbox'
+    let inputValue = document.getElementById("todo-txt").value;
+    let t = document.createTextNode(inputValue);
+    divToDo.appendChild(divTxt)
+    divToDo.appendChild(divCross)
+    divToDo.appendChild(labelRef)
+    labelRef.appendChild(inputRef)
+    labelRef.appendChild(spanRef)
+    divTxt.appendChild(t);
+    if (inputValue === '') {
+      alert("You must write something!");
+    } else {
+      document.getElementById("central-elements").appendChild(divToDo);
+    }
+    // document.querySelector(".todo-txt").value = "";
+    
+  }
+  document.addEventListener("keypress", function(e) {
+    if (e.key === "Enter" && (document.activeElement.tagName.toLowerCase() !== 'button')) {
+    newElement();
+      console.log("New item created!");
+    }
+  });
+
 ////checkbox mark completed TODOs///
 let completedToDO = 0;
+
 function clickedBoxes() {
-  checkboxes.forEach((checkbox) =>
+  checkboxes.forEach(checkbox =>
     checkbox.addEventListener("change", (event) => {
-      const parent = checkbox.parentElement.nextElementSibling;
+      const todoText = checkbox.parentElement.nextElementSibling;
       if (checkbox.checked) {
-        parent.style.textDecoration = "line-through";
+        todoText.style.textDecoration = "line-through";
         completedToDO = document.querySelectorAll(
           'input[type="checkbox"]:checked'
         ).length;
         elementCount();
-      } else parent.style.textDecoration = "none";
+      } else todoText.style.textDecoration = "none";
       completedToDO = document.querySelectorAll(
         'input[type="checkbox"]:checked'
       ).length;
@@ -107,19 +150,33 @@ function clickedBoxes() {
 }
 clickedBoxes();
 
+
 // remove elements to DOM////////
 
-removedToDo = [];
-function remove() {
-  this.parentNode.parentNode.removeChild(this.parentNode);
-  removedToDo.push(this.parentNode);
-  console.log(this.parentNode, removedToDo);
-  elementCount();
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+let div;
+// removedToDo = [];
+function removeToDo() {
+    div = this.parentElement;
+    div.style.display = "none";
+//   this.parentNode.parentNode.removeChild(this.parentNode);
+//   removedToDo.push(div.length);
+//     console.log(removeToDo)
+//   elementCount();
 }
 
 for (let i = 0; i < TODOLIST.length; i++) {
-  CROSS[i].addEventListener("click", remove);
+  CROSS[i].addEventListener("click", removeToDo);
 }
+COMPLETED.addEventListener('click', removeToDo)
 
 // //Elements counts//
 
@@ -132,9 +189,4 @@ function elementCount() {
 }
 elementCount();
 
-function clearCompleted() {
-  completedToDO = document.querySelectorAll('input[type="checkbox"]:checked');
-  console.log(completedToDO);
-}
-
-CLEAR.addEventListener("click", remove);
+  
