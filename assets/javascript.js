@@ -89,7 +89,7 @@ function lightCardMode() {
 
 
 // Create a new list item when clicking on 'Enter' button
-function newElement(divTodo) {
+function newElement() {
     let divToDo = document.createElement("div");
    
     let divTxt = document.createElement('div');
@@ -106,11 +106,11 @@ function newElement(divTodo) {
     inputRef.name = 'checkbox'
     let inputValue = document.getElementById("todo-txt").value;
     let t = document.createTextNode(inputValue);
-    divToDo.appendChild(divTxt)
-    divToDo.appendChild(divCross)
     divToDo.appendChild(labelRef)
     labelRef.appendChild(inputRef)
     labelRef.appendChild(spanRef)
+    divToDo.appendChild(divTxt)
+    divToDo.appendChild(divCross)
     divTxt.appendChild(t);
     if (inputValue === '') {
       alert("You must write something!");
@@ -162,31 +162,46 @@ for (i = 0; i < close.length; i++) {
     div.style.display = "none";
   }
 }
-let div;
-// removedToDo = [];
+
 function removeToDo() {
-    div = this.parentElement;
+   let div = this.parentElement;
     div.style.display = "none";
-//   this.parentNode.parentNode.removeChild(this.parentNode);
-//   removedToDo.push(div.length);
-//     console.log(removeToDo)
-//   elementCount();
+
+elementCount();
+    
 }
 
 for (let i = 0; i < TODOLIST.length; i++) {
   CROSS[i].addEventListener("click", removeToDo);
 }
-COMPLETED.addEventListener('click', removeToDo)
 
 // //Elements counts//
 
 function elementCount() {
-  let number = document.getElementById("items-left");
+    let number = document.getElementById("items-left");
+    let todoItemsCount = document.getElementById("central-elements").childElementCount;
+      const TODOLIST = document.querySelectorAll(".todo-list");
+      let removeToDoCount = 0
+      for(let i=0; i<TODOLIST.length; i++){
+              if(TODOLIST[i].style.display  == 'none'){
+                   removeToDoCount++
+                }
+            }
 
-  let todoItemsCount = document.getElementById("central-elements")
-    .childElementCount;
-  number.childNodes[0].textContent = todoItemsCount - completedToDO;
+  number.childNodes[0].textContent = todoItemsCount-removeToDoCount - completedToDO;
 }
 elementCount();
 
-  
+
+function ClearCompleted(){
+    const TODOLIST = document.querySelectorAll(".todo-list");
+      let x = document.querySelectorAll(
+        'input[type="checkbox"]:checked');
+              for(let i=0; i<x.length; i++){
+                   TODOLIST[i].style.display = 'none'
+                   
+                }
+            
+}
+
+CLEAR.addEventListener('click',ClearCompleted)
