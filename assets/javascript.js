@@ -190,8 +190,8 @@ console.log(todoItemsCount, removeToDoCount, completedToDO)
 
 elementCount();
 
-//-----Clear Completed Button ----//
-function ClearCompleted(){
+//-----Clear Completed and Active Buttons ----//
+function clearCompleted(){
     for(let i=0; i<checkboxes.length; i++){
         if(checkboxes[i].checked){
             checkboxes[i].parentElement.parentElement.style.display = 'none';
@@ -200,4 +200,17 @@ function ClearCompleted(){
     }   
 }
 
-CLEAR.addEventListener('click',ClearCompleted )
+CLEAR.addEventListener('click',clearCompleted )
+ACTIVE.addEventListener('click',clearCompleted )
+
+
+// function showAll(){
+//   for(let i=0; i<TODOLIST.length; i++){
+//          TODOLIST[i] = 'block';
+//           console.log(checkboxes.length)
+//       }
+//   }   
+// }
+
+// ALL.addEventListener('click',showAll )
+
