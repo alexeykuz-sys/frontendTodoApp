@@ -116,9 +116,7 @@ function newElement() {
       alert("You must write something!");
     } else {
       document.getElementById("central-elements").appendChild(divToDo);
-    }
-    // document.querySelector(".todo-txt").value = "";
-    
+    }    
   }
   document.addEventListener("keypress", function(e) {
     if (e.key === "Enter" && (document.activeElement.tagName.toLowerCase() !== 'button')) {
@@ -151,7 +149,7 @@ function clickedBoxes() {
 clickedBoxes();
 
 
-// remove elements to DOM////////
+//remove elements to DOM//
 
 
 var close = document.getElementsByClassName("close");
@@ -166,16 +164,13 @@ for (i = 0; i < close.length; i++) {
 function removeToDo() {
    let div = this.parentElement;
     div.style.display = "none";
-
-elementCount();
-    
 }
 
 for (let i = 0; i < TODOLIST.length; i++) {
   CROSS[i].addEventListener("click", removeToDo);
 }
 
-// //Elements counts//
+//Elements counts//
 
 function elementCount() {
     let number = document.getElementById("items-left");
@@ -189,22 +184,20 @@ function elementCount() {
             }
 
   number.childNodes[0].textContent = todoItemsCount-removeToDoCount - completedToDO;
+console.log(todoItemsCount, removeToDoCount, completedToDO)
 }
+
+
 elementCount();
 
-
+//-----Clear Completed Button ----//
 function ClearCompleted(){
-    const TODOLIST = document.querySelectorAll(".todo-list");
-      let x = document.querySelectorAll(
-        'input[type="checkbox"]:checked');
-        for(let i=0; i<x.length; i++){
-                  console.log(x)
-                  
-                   TODOLIST[i].style.display = 'none'
-                   console.log(TODOLIST[i])
-                   
-                }
-            
+    for(let i=0; i<checkboxes.length; i++){
+        if(checkboxes[i].checked){
+            checkboxes[i].parentElement.parentElement.style.display = 'none';
+            console.log(checkboxes.length)
+        }
+    }   
 }
 
-CLEAR.addEventListener('click',removeToDo)
+CLEAR.addEventListener('click',ClearCompleted )
