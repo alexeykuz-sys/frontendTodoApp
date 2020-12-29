@@ -197,11 +197,14 @@ function ClearCompleted(){
     const TODOLIST = document.querySelectorAll(".todo-list");
       let x = document.querySelectorAll(
         'input[type="checkbox"]:checked');
-              for(let i=0; i<x.length; i++){
+        for(let i=0; i<x.length; i++){
+                  console.log(x)
+                  
                    TODOLIST[i].style.display = 'none'
+                   console.log(TODOLIST[i])
                    
                 }
             
 }
 
-CLEAR.addEventListener('click',ClearCompleted)
+CLEAR.addEventListener('click',removeToDo)
