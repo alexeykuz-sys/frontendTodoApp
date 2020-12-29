@@ -5,7 +5,7 @@ const BGIMGDARK = document.getElementById("bg-image-dark");
 const CROSS = document.querySelectorAll(".cross");
 const checkboxes = document.querySelectorAll("input[name=checkbox]");
 const CLEAR = document.getElementById("clear-completed");
-const ALL = document.querySelector("#all");
+const ALL = document.getElementById("all");
 const ACTIVE = document.getElementById("active");
 const COMPLETED = document.getElementById("completed");
 const TODOLIST = document.querySelectorAll(".todo-list");
@@ -195,7 +195,9 @@ function clearCompleted(){
     for(let i=0; i<checkboxes.length; i++){
         if(checkboxes[i].checked){
             checkboxes[i].parentElement.parentElement.style.display = 'none';
-            console.log(checkboxes.length)
+           
+        } else {
+          checkboxes[i].parentElement.parentElement.style.display = 'flex';
         }
     }   
 }
@@ -203,14 +205,29 @@ function clearCompleted(){
 CLEAR.addEventListener('click',clearCompleted )
 ACTIVE.addEventListener('click',clearCompleted )
 
+//-----Show Completed Button ----//
+function showCompleted(){
+  for(let i=0; i<checkboxes.length; i++){
+      if(!checkboxes[i].checked){
+          checkboxes[i].parentElement.parentElement.style.display = 'none';
+         
+      } else if(!checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
+        checkboxes[i].parentElement.parentElement.style.display = 'flex';
+      }
+  }   
+}
 
-// function showAll(){
-//   for(let i=0; i<TODOLIST.length; i++){
-//          TODOLIST[i] = 'block';
-//           console.log(checkboxes.length)
-//       }
-//   }   
-// }
+COMPLETED.addEventListener('click',showCompleted )
 
-// ALL.addEventListener('click',showAll )
+//-----Show All Button ----//
 
+function showAll(){
+  for(let i=0; i<checkboxes.length; i++){
+      if(checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
+          checkboxes[i].parentElement.parentElement.style.display = 'flex';
+         console.log('sd')
+      }
+  }   
+}
+
+ALL.addEventListener('click',showAll )
