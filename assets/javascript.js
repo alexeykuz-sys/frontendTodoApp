@@ -89,15 +89,16 @@ function lightCardMode() {
 
 
 // Create a new list item when clicking on 'Enter' button
+let divToDo
 function newElement() {
-    let divToDo = document.createElement("div");
+    divToDo = document.createElement("div");
    
     let divTxt = document.createElement('div');
     let labelRef = document.createElement('label');
     let inputRef = document.createElement('input');
     let spanRef = document.createElement('span');
     let divCross = document.createElement('div');
-    divToDo.className = 'todo-list'
+    divToDo.className = 'todo-list new-todo-list';
     divTxt.className = 'todo-txt'
     divCross.className = 'cross'
     labelRef.className = 'checkbox-container'
@@ -117,13 +118,31 @@ function newElement() {
     } else {
       document.getElementById("central-elements").appendChild(divToDo);
     }    
+   
   }
   document.addEventListener("keypress", function(e) {
     if (e.key === "Enter" && (document.activeElement.tagName.toLowerCase() !== 'button')) {
-    newElement();
+      newElement();
       console.log("New item created!");
     }
+    NewElementCount()
   });
+
+
+//New Elements count///
+
+function NewElementCount(){
+  let newToDo = document.querySelector('.new-todo-list')
+  newToDo = 0;
+  console.log(newToDo)
+  for(let i=0; i<newToDo.length; i++){
+    
+    newToDo++
+    console.log(newToDo)
+
+  }
+}
+
 
 ////checkbox mark completed TODOs///
 let completedToDO = 0;
@@ -210,12 +229,16 @@ function showCompleted(){
   for(let i=0; i<checkboxes.length; i++){
       if(!checkboxes[i].checked){
           checkboxes[i].parentElement.parentElement.style.display = 'none';
+          
          
-      } else if(!checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
+      } else if(checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
         checkboxes[i].parentElement.parentElement.style.display = 'flex';
+        
+          
+        }
       }
   }   
-}
+
 
 COMPLETED.addEventListener('click',showCompleted )
 
@@ -223,10 +246,7 @@ COMPLETED.addEventListener('click',showCompleted )
 
 function showAll(){
   for(let i=0; i<checkboxes.length; i++){
-      if(checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
-          checkboxes[i].parentElement.parentElement.style.display = 'flex';
-         console.log('sd')
-      }
+    checkboxes[i].parentElement.parentElement.style.display = 'flex';
   }   
 }
 
