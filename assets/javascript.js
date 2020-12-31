@@ -131,16 +131,10 @@ function newElement() {
 
 //New Elements count///
 
+let newToDo = 0 ;
 function NewElementCount(){
-  let newToDo = document.querySelector('.new-todo-list')
-  newToDo = 0;
-  console.log(newToDo)
-  for(let i=0; i<newToDo.length; i++){
-    
-    newToDo++
-    console.log(newToDo)
-
-  }
+  newToDo = document.querySelectorAll('.new-todo-list').length;
+    elementCount()
 }
 
 
@@ -201,7 +195,7 @@ function elementCount() {
                    removeToDoCount++
                 }
             }
-
+            console.log(newToDo)
   number.childNodes[0].textContent = todoItemsCount-removeToDoCount - completedToDO;
 console.log(todoItemsCount, removeToDoCount, completedToDO)
 }
