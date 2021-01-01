@@ -164,26 +164,24 @@ clickedBoxes();
 
 //remove elements to DOM//
 
-// var close = document.getElementsByClassName("close");
-// var i;
-// for (i = 0; i < close.length; i++) {
-//   close[i].onclick = function () {
-//     var div = this.parentElement;
-//     div.style.display = "none";
-//   };
-// }
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function () {
+    var div = this.parentElement;
+    div.style.display = "none";
+  };
+}
 
 function removeToDo() {
   let div = this.parentElement;
-  console.log(this, div)
+  console.log(div)
   div.style.display = "none";
 }
 
 for (let i = 0; i < TODOLIST.length; i++) {
   CROSS[i].addEventListener("click", removeToDo);
 }
-
-
 
 //Elements counts//
 
