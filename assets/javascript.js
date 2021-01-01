@@ -9,6 +9,7 @@ const ALL = document.getElementById("all");
 const ACTIVE = document.getElementById("active");
 const COMPLETED = document.getElementById("completed");
 const TODOLIST = document.querySelectorAll(".todo-list");
+const newToDo = document.querySelectorAll(".new-todo-list");
 
 function lightDarkModeChanger() {
   if (MOON.classList.contains("show")) {
@@ -85,65 +86,63 @@ function lightCardMode() {
   changeTextColors([".todo-txt"], ["var(--DarkrayishBlueLM"]);
 }
 
-
-
-
 // Create a new list item when clicking on 'Enter' button
-let divToDo
+let divToDo;
 function newElement() {
-    divToDo = document.createElement("div");
-   
-    let divTxt = document.createElement('div');
-    let labelRef = document.createElement('label');
-    let inputRef = document.createElement('input');
-    let spanRef = document.createElement('span');
-    let divCross = document.createElement('div');
-    divToDo.className = 'todo-list new-todo-list';
-    divTxt.className = 'todo-txt'
-    divCross.className = 'cross'
-    labelRef.className = 'checkbox-container'
-    spanRef.className = 'checkmark'
-    inputRef.type = 'checkbox'
-    inputRef.name = 'checkbox'
-    let inputValue = document.getElementById("todo-txt").value;
-    let t = document.createTextNode(inputValue);
-    divToDo.appendChild(labelRef)
-    labelRef.appendChild(inputRef)
-    labelRef.appendChild(spanRef)
-    divToDo.appendChild(divTxt)
-    divToDo.appendChild(divCross)
-    divTxt.appendChild(t);
-    if (inputValue === '') {
-      alert("You must write something!");
-    } else {
-      document.getElementById("central-elements").appendChild(divToDo);
-    }    
-   
-  }
-  document.addEventListener("keypress", function(e) {
-    if (e.key === "Enter" && (document.activeElement.tagName.toLowerCase() !== 'button')) {
-      newElement();
-      console.log("New item created!");
-    }
-    NewElementCount()
-  });
+  divToDo = document.createElement("div");
 
+  let divTxt = document.createElement("div");
+  let labelRef = document.createElement("label");
+  let inputRef = document.createElement("input");
+  let spanRef = document.createElement("span");
+  let divCross = document.createElement("div");
+  divToDo.className = "todo-list new-todo-list";
+  divTxt.className = "todo-txt";
+  divCross.className = "cross";
+  labelRef.className = "checkbox-container";
+  spanRef.className = "checkmark";
+  inputRef.type = "checkbox";
+  inputRef.name = "checkbox";
+  let inputValue = document.getElementById("todo-txt").value;
+  let t = document.createTextNode(inputValue);
+  divToDo.appendChild(labelRef);
+  labelRef.appendChild(inputRef);
+  labelRef.appendChild(spanRef);
+  divToDo.appendChild(divTxt);
+  divToDo.appendChild(divCross);
+  divTxt.appendChild(t);
+  if (inputValue === "") {
+    alert("You must write something!");
+  } else {
+    document.getElementById("central-elements").appendChild(divToDo);
+  }
+}
+document.addEventListener("keypress", function (e) {
+  if (
+    e.key === "Enter" &&
+    document.activeElement.tagName.toLowerCase() !== "button"
+  ) {
+    newElement();
+    console.log("New item created!");
+  }
+  NewElementCount();
+  clickedBoxes();
+});
 
 //New Elements count///
 
-let newToDo = 0 ;
-function NewElementCount(){
-  newToDo = document.querySelectorAll('.new-todo-list').length;
-    elementCount()
+function NewElementCount() {
+  newToDo.length;
+  elementCount();
 }
-
 
 ////checkbox mark completed TODOs///
 let completedToDO = 0;
 
 function clickedBoxes() {
-  checkboxes.forEach(checkbox =>
+  checkboxes.forEach((checkbox) =>
     checkbox.addEventListener("change", (event) => {
+      
       const todoText = checkbox.parentElement.nextElementSibling;
       if (checkbox.checked) {
         todoText.style.textDecoration = "line-through";
@@ -156,92 +155,89 @@ function clickedBoxes() {
         'input[type="checkbox"]:checked'
       ).length;
       elementCount();
+      
     })
   );
 }
 clickedBoxes();
 
-
 //remove elements to DOM//
 
-
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
+// var close = document.getElementsByClassName("close");
+// var i;
+// for (i = 0; i < close.length; i++) {
+//   close[i].onclick = function () {
+//     var div = this.parentElement;
+//     div.style.display = "none";
+//   };
+// }
 
 function removeToDo() {
-   let div = this.parentElement;
-    div.style.display = "none";
+  let div = this.parentElement;
+  console.log(div)
+  div.style.display = "none";
 }
 
 for (let i = 0; i < TODOLIST.length; i++) {
   CROSS[i].addEventListener("click", removeToDo);
 }
 
+
 //Elements counts//
 
 function elementCount() {
-    let number = document.getElementById("items-left");
-    let todoItemsCount = document.getElementById("central-elements").childElementCount;
-      const TODOLIST = document.querySelectorAll(".todo-list");
-      let removeToDoCount = 0
-      for(let i=0; i<TODOLIST.length; i++){
-              if(TODOLIST[i].style.display  == 'none'){
-                   removeToDoCount++
-                }
-            }
-            console.log(newToDo)
-  number.childNodes[0].textContent = todoItemsCount-removeToDoCount - completedToDO;
-console.log(todoItemsCount, removeToDoCount, completedToDO)
-}
+  let number = document.getElementById("items-left");
+  let todoItemsCount = document.getElementById("central-elements")
+    .childElementCount;
+  const TODOLIST = document.querySelectorAll(".todo-list");
+  let removeToDoCount = 0;
+  for (let i = 0; i < TODOLIST.length; i++) {
+    if (TODOLIST[i].style.display == "none") {
+      removeToDoCount++;
+    }
+  }
 
+  number.childNodes[0].textContent =
+    todoItemsCount - removeToDoCount - completedToDO;
+}
 
 elementCount();
 
 //-----Clear Completed and Active Buttons ----//
-function clearCompleted(){
-    for(let i=0; i<checkboxes.length; i++){
-        if(checkboxes[i].checked){
-            checkboxes[i].parentElement.parentElement.style.display = 'none';
-           
-        } else {
-          checkboxes[i].parentElement.parentElement.style.display = 'flex';
-        }
-    }   
+function clearCompleted() {
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      checkboxes[i].parentElement.parentElement.style.display = "none";
+    } else {
+      checkboxes[i].parentElement.parentElement.style.display = "flex";
+    }
+  }
 }
-
-CLEAR.addEventListener('click',clearCompleted )
-ACTIVE.addEventListener('click',clearCompleted )
+CLEAR.addEventListener("click", clearCompleted);
+ACTIVE.addEventListener("click", clearCompleted);
 
 //-----Show Completed Button ----//
-function showCompleted(){
-  for(let i=0; i<checkboxes.length; i++){
-      if(!checkboxes[i].checked){
-          checkboxes[i].parentElement.parentElement.style.display = 'none';
-          
-         
-      } else if(checkboxes[i].checked && checkboxes[i].parentElement.parentElement.style.display == 'none'){
-        checkboxes[i].parentElement.parentElement.style.display = 'flex';
-        
-          
-        }
-      }
-  }   
-
-
-COMPLETED.addEventListener('click',showCompleted )
-
-//-----Show All Button ----//
-
-function showAll(){
-  for(let i=0; i<checkboxes.length; i++){
-    checkboxes[i].parentElement.parentElement.style.display = 'flex';
-  }   
+function showCompleted() {
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (!checkboxes[i].checked) {
+      checkboxes[i].parentElement.parentElement.style.display = "none";
+    } else if (
+      checkboxes[i].checked &&
+      checkboxes[i].parentElement.parentElement.style.display == "none"
+    ) {
+      checkboxes[i].parentElement.parentElement.style.display = "flex";
+    }
+  }
 }
 
-ALL.addEventListener('click',showAll )
+COMPLETED.addEventListener("click", showCompleted);
+
+// -----Show All Button ----//
+
+function showAll() {
+  for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].parentElement.parentElement.style.display = "flex";
+  }
+}
+
+ALL.addEventListener("click", showAll);
