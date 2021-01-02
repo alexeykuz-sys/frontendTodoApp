@@ -137,30 +137,48 @@ function NewElementCount() {
 }
 
 ////checkbox mark completed TODOs///
-
-
-let completedToDO = 0;
-function clickedBoxes() {
-  checkboxes.forEach((checkbox) =>
-    checkbox.addEventListener("change", (event) => {
-      console.log(checkbox.parentElement)
-      const todoText = checkbox.parentElement.nextElementSibling;
-      if (checkbox.checked) {
-        todoText.style.textDecoration = "line-through";
+checkBoxContainers = document.querySelectorAll('.checkbox-container')
+checkBoxContainers.forEach(checkbBoxContainer=>checkbBoxContainer.addEventListener('click', function(e){
+  if(e.target){
+  console.log(e.target)
+  const todoText = e.target.parentElement.nextElementSibling;
+  console.log(todoText)
+        if (e.target.checked) {
+          todoText.style.textDecoration = "line-through";
+          completedToDO = document.querySelectorAll(
+            'input[type="checkbox"]:checked'
+          ).length;
+          elementCount();
+        } else todoText.style.textDecoration = "none";
         completedToDO = document.querySelectorAll(
           'input[type="checkbox"]:checked'
         ).length;
         elementCount();
-      } else todoText.style.textDecoration = "none";
-      completedToDO = document.querySelectorAll(
-        'input[type="checkbox"]:checked'
-      ).length;
-      elementCount();
+  }
+}))
+
+// let completedToDO = 0;
+// function clickedBoxes() {
+//   checkboxes.forEach((checkbox) =>
+//     checkbox.addEventListener("change", (event) => {
+//       console.log(checkbox.parentElement)
+//       const todoText = checkbox.parentElement.nextElementSibling;
+//       if (checkbox.checked) {
+//         todoText.style.textDecoration = "line-through";
+//         completedToDO = document.querySelectorAll(
+//           'input[type="checkbox"]:checked'
+//         ).length;
+//         elementCount();
+//       } else todoText.style.textDecoration = "none";
+//       completedToDO = document.querySelectorAll(
+//         'input[type="checkbox"]:checked'
+//       ).length;
+//       elementCount();
       
-    })
-  );
-}
-clickedBoxes();
+//     })
+//   );
+// }
+// clickedBoxes();
 
 //remove elements to DOM//
 
