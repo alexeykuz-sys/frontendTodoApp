@@ -126,7 +126,7 @@ document.addEventListener("keypress", function (e) {
     console.log("New item created!");
   }
   NewElementCount();
-  clickedBoxes();
+  // clickedBoxes();
 });
 
 //New Elements count///
@@ -139,11 +139,9 @@ function NewElementCount() {
 let completedToDO = 0;
 function clickedBoxes() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
-    console.log(e.target.parentElement.nextElementSibling);
     let targetClick = e.target;
     const todoText = targetClick.parentElement.nextElementSibling;
     if (targetClick.checked) {
-      console.log(todoText);
       todoText.style.textDecoration = "line-through";
       completedToDO = document.querySelectorAll(
         'input[type="checkbox"]:checked'
@@ -182,26 +180,34 @@ clickedBoxes();
 
 //remove elements to DOM//
 
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var div = this.parentElement;
-    div.style.display = "none";
-  };
-}
+// var close = document.getElementsByClassName("close");
+// var i;
+// for (i = 0; i < close.length; i++) {
+//   close[i].onclick = function () {
+//     var div = this.parentElement;
+//     div.style.display = "none";
+//   };
+// }
+
+// function removeToDo() {
+//   let div = this.parentElement;
+//   console.log(div);
+//   div.style.display = "none";
+// }
+
+// for (let i = 0; i < TODOLIST.length; i++) {
+//   CROSS[i].addEventListener("click", removeToDo);
+// }
 
 function removeToDo() {
-  let div = this.parentElement;
-  console.log(div);
-  div.style.display = "none";
+  document.getElementById("central-elements").addEventListener("click", (e) => {
+    if (e.target.className === "cross") {
+      e.target.parentElement.style.display = "none";
+    }
+  });
 }
-
-for (let i = 0; i < TODOLIST.length; i++) {
-  CROSS[i].addEventListener("click", removeToDo);
-}
-
-//Elements counts//
+removeToDo()
+// Elements counts//
 
 function elementCount() {
   let number = document.getElementById("items-left");
@@ -252,25 +258,28 @@ function showCompleted() {
 
 // -----Show All Button ----//
 
-function showAll() {
-  for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].parentElement.parentElement.style.display = "flex";
-    console.log(checkboxes[i].parentElement.parentElement);
-  }
-}
+// function showAll() {
+
+//   for (let i = 0; i < checkboxes.length; i++) {
+//     checkboxes[i].parentElement.parentElement.style.display = "flex";
+//     console.log(checkboxes[i].parentElement.parentElement);
+//   }
+// }
 
 // ALL.addEventListener("click", showAll);
 
-let listItems = document.getElementById('list-items');
-
-listItems.addEventListener("click", (event) => {
+document.getElementById("list-items").addEventListener("click", (event) => {
   let target = event.target;
+  console.log(target.parentNode);
   switch (target.id) {
     case "all":
-      showAll();
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].parentElement.parentElement.style.display = "flex";
+        console.log(checkboxes[i].parentElement.parentElement);
+      }
       break;
-      case "active":
-        clearCompleted();
+    case "active":
+      clearCompleted();
       break;
     case "completed":
       showCompleted();
@@ -285,5 +294,6 @@ clearCompletedButton.addEventListener("click", (event) => {
 
   if ((target.id = "clear-completed")) {
     clearCompleted();
+    console.log("dsf");
   }
 });
