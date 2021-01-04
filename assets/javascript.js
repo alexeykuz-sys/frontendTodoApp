@@ -5,10 +5,11 @@ const BGIMGDARK = document.getElementById("bg-image-dark");
 const CROSS = document.querySelectorAll(".cross");
 const checkboxes = document.querySelectorAll("input[name=checkbox]");
 const CLEAR = document.getElementById("clear-completed");
-// const ALL = document.getElementById("all");
-// const ACTIVE = document.getElementById("active");
-// const COMPLETED = document.getElementById("completed");
+const ALL = document.getElementById("all");
+const ACTIVE = document.getElementById("active");
+const COMPLETED = document.getElementById("completed");
 const TODOLIST = document.querySelectorAll(".todo-list");
+const TODOLISTGLOBAL = document.getElementById("central-elements").children;
 const newToDo = document.querySelectorAll(".new-todo-list");
 
 function lightDarkModeChanger() {
@@ -140,6 +141,7 @@ let completedToDO = 0;
 function clickedBoxes() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
     let targetClick = e.target;
+    console.log(targetClick);
     const todoText = targetClick.parentElement.nextElementSibling;
     if (targetClick.checked) {
       todoText.style.textDecoration = "line-through";
@@ -155,50 +157,6 @@ function clickedBoxes() {
 }
 clickedBoxes();
 
-// let completedToDO = 0;
-// function clickedBoxes() {
-//   checkboxes.forEach((checkbox) =>
-//     checkbox.addEventListener("change", (event) => {
-//       console.log(checkbox.parentElement)
-//       const todoText = checkbox.parentElement.nextElementSibling;
-//       if (checkbox.checked) {
-//         todoText.style.textDecoration = "line-through";
-//         completedToDO = document.querySelectorAll(
-//           'input[type="checkbox"]:checked'
-//         ).length;
-//         elementCount();
-//       } else todoText.style.textDecoration = "none";
-//       completedToDO = document.querySelectorAll(
-//         'input[type="checkbox"]:checked'
-//       ).length;
-//       elementCount();
-
-//     })
-//   );
-// }
-// clickedBoxes();
-
-//remove elements to DOM//
-
-// var close = document.getElementsByClassName("close");
-// var i;
-// for (i = 0; i < close.length; i++) {
-//   close[i].onclick = function () {
-//     var div = this.parentElement;
-//     div.style.display = "none";
-//   };
-// }
-
-// function removeToDo() {
-//   let div = this.parentElement;
-//   console.log(div);
-//   div.style.display = "none";
-// }
-
-// for (let i = 0; i < TODOLIST.length; i++) {
-//   CROSS[i].addEventListener("click", removeToDo);
-// }
-
 function removeToDo() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
     if (e.target.className === "cross") {
@@ -206,7 +164,7 @@ function removeToDo() {
     }
   });
 }
-removeToDo()
+removeToDo();
 // Elements counts//
 
 function elementCount() {
@@ -224,76 +182,46 @@ function elementCount() {
   number.childNodes[0].textContent =
     todoItemsCount - removeToDoCount - completedToDO;
 }
-
 elementCount();
 
 //-----Clear Completed and Active Buttons ----//
 function clearCompleted() {
-  for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked) {
-      checkboxes[i].parentElement.parentElement.style.display = "none";
+  for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
+    if (TODOLISTGLOBAL[i].children[0].children[0].checked) {
+      TODOLISTGLOBAL[i].style.display = "none";
     } else {
-      checkboxes[i].parentElement.parentElement.style.display = "flex";
+      TODOLISTGLOBAL[i].style.display = "flex";
     }
   }
 }
-// CLEAR.addEventListener("click", clearCompleted);
-// ACTIVE.addEventListener("click", clearCompleted);
+// }
+CLEAR.addEventListener("click", clearCompleted);
+ACTIVE.addEventListener("click", clearCompleted);
 
 //-----Show Completed Button ----//
 function showCompleted() {
-  for (let i = 0; i < checkboxes.length; i++) {
-    if (!checkboxes[i].checked) {
-      checkboxes[i].parentElement.parentElement.style.display = "none";
-    } else if (
-      checkboxes[i].checked &&
-      checkboxes[i].parentElement.parentElement.style.display == "none"
-    ) {
-      checkboxes[i].parentElement.parentElement.style.display = "flex";
+
+  for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
+    console.log(TODOLISTGLOBAL[i])
+
+    if (!TODOLISTGLOBAL[i].children[0].children[0].checked) {
+      TODOLISTGLOBAL[i].style.display = "none";
+    } else if (TODOLISTGLOBAL[i].children[0].children[0].checked && TODOLISTGLOBAL[i].style.display == 'none') {
+      TODOLISTGLOBAL[i].style.display = "flex";
     }
   }
 }
 
-// COMPLETED.addEventListener("click", showCompleted);
+COMPLETED.addEventListener("click", showCompleted);
 
 // -----Show All Button ----//
 
-// function showAll() {
+function showAll() {
 
-//   for (let i = 0; i < checkboxes.length; i++) {
-//     checkboxes[i].parentElement.parentElement.style.display = "flex";
-//     console.log(checkboxes[i].parentElement.parentElement);
-//   }
-// }
+  for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
+    console.log(TODOLISTGLOBAL[i])
+      TODOLISTGLOBAL[i].style.display = "flex";
 
-// ALL.addEventListener("click", showAll);
-
-document.getElementById("list-items").addEventListener("click", (event) => {
-  let target = event.target;
-  console.log(target.parentNode);
-  switch (target.id) {
-    case "all":
-      for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].parentElement.parentElement.style.display = "flex";
-        console.log(checkboxes[i].parentElement.parentElement);
-      }
-      break;
-    case "active":
-      clearCompleted();
-      break;
-    case "completed":
-      showCompleted();
-      break;
-  }
-});
-
-let clearCompletedButton = document.querySelector("#todo-completed");
-
-clearCompletedButton.addEventListener("click", (event) => {
-  let target = event.target;
-
-  if ((target.id = "clear-completed")) {
-    clearCompleted();
-    console.log("dsf");
-  }
-});
+}
+}
+ALL.addEventListener("click", showAll);
