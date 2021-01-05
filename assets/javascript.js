@@ -154,23 +154,22 @@ function clickedBoxes() {
 }
 clickedBoxes();
 
-
-
-let removeToDoCount=0;
+let removeToDoCount = 0;
 function removeToDo() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
-      if (e.target.className === "cross" && e.target.parentElement.children[0].children[0].checked) {
-          e.target.parentElement.style.display = "none";
-          
-          
-        } else if (e.target.className === "cross" && !e.target.parentElement.children[0].children[0].checked) {
-            //   e.target.parentElement.style.display = "none";
-            e.target.parentNode.parentNode.removeChild(e.target.parentNode)
-              console.log(e.target.parentNode.parentNode)
-        //   removeToDoCount+=1;
-          elementCount();
+    if (
+      e.target.className === "cross" &&
+      e.target.parentElement.children[0].children[0].checked
+    ) {
+      e.target.parentElement.style.display = "none";
+    } else if (
+      e.target.className === "cross" &&
+      !e.target.parentElement.children[0].children[0].checked
+    ) {
+      e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+      elementCount();
     }
-  })
+  });
 }
 removeToDo();
 
@@ -181,12 +180,8 @@ function elementCount() {
   let todoItemsCount = document.getElementById("central-elements")
     .childElementCount;
 
-
   number.childNodes[0].textContent =
-    todoItemsCount -removeToDoCount - completedToDO;
-  console.log("todoitemscount", todoItemsCount);
-  console.log("removetodocount", removeToDoCount);
-  console.log("completedtodo", completedToDO);
+    todoItemsCount - removeToDoCount - completedToDO;
 }
 elementCount();
 
