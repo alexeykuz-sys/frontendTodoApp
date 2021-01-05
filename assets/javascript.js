@@ -2,13 +2,12 @@ const SUN = document.getElementById("sun");
 const MOON = document.getElementById("moon");
 const BGIMGLIGHT = document.getElementById("bg-image-light");
 const BGIMGDARK = document.getElementById("bg-image-dark");
-const CROSS = document.querySelectorAll(".cross");
-const checkboxes = document.querySelectorAll("input[name=checkbox]");
+// const CROSS = document.querySelectorAll(".cross");
+// const checkboxes = document.querySelectorAll("input[name=checkbox]");
 const CLEAR = document.getElementById("clear-completed");
 const ALL = document.getElementById("all");
 const ACTIVE = document.getElementById("active");
 const COMPLETED = document.getElementById("completed");
-const TODOLIST = document.querySelectorAll(".todo-list");
 const TODOLISTGLOBAL = document.getElementById("central-elements").children;
 const newToDo = document.querySelectorAll(".new-todo-list");
 
@@ -65,7 +64,7 @@ function changeColors(selectors, color) {
 function changeTextColors(selectors, color) {
   selectors.forEach((selector) => {
     const elements = document.querySelectorAll(selector);
-    for (i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
       elements[i].style.color = color;
     }
   });
@@ -88,9 +87,9 @@ function lightCardMode() {
 }
 
 // Create a new list item when clicking on 'Enter' button
-let divToDo;
+
 function newElement() {
-  divToDo = document.createElement("div");
+  let divToDo = document.createElement("div");
 
   let divTxt = document.createElement("div");
   let labelRef = document.createElement("label");
@@ -127,7 +126,6 @@ document.addEventListener("keypress", function (e) {
     console.log("New item created!");
   }
   NewElementCount();
-  // clickedBoxes();
 });
 
 //New Elements count///
@@ -141,7 +139,6 @@ let completedToDO = 0;
 function clickedBoxes() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
     let targetClick = e.target;
-    console.log(targetClick);
     const todoText = targetClick.parentElement.nextElementSibling;
     if (targetClick.checked) {
       todoText.style.textDecoration = "line-through";
@@ -157,30 +154,46 @@ function clickedBoxes() {
 }
 clickedBoxes();
 
+let removeToDoCount=0;
 function removeToDo() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
     if (e.target.className === "cross") {
-      e.target.parentElement.style.display = "none";
+      for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
+        if (TODOLISTGLOBAL[i].children[0].children[0].checked) {
+          console.log(TODOLISTGLOBAL[i].children[0].children[0].checked);
+          e.target.parentElement.style.display = "none";
+          
+         
+        } else if (!TODOLISTGLOBAL[i].children[0].children[0].checked) {
+          e.target.parentElement.style.display = "none";
+          // removeToDoCount+=1;
+          console.log(TODOLISTGLOBAL.length)
+          elementCount();
+        }
+      }
     }
   });
 }
 removeToDo();
+
 // Elements counts//
 
 function elementCount() {
   let number = document.getElementById("items-left");
   let todoItemsCount = document.getElementById("central-elements")
     .childElementCount;
-  const TODOLIST = document.querySelectorAll(".todo-list");
-  let removeToDoCount = 0;
-  for (let i = 0; i < TODOLIST.length; i++) {
-    if (TODOLIST[i].style.display == "none") {
-      removeToDoCount++;
-    }
-  }
+  // let removeToDoCount = 0;
+  // for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
+  //   if (TODOLISTGLOBAL[i].style.display == "none") {
+  //     removeToDoCount++;
+  //   }
+  // }
 
   number.childNodes[0].textContent =
-    todoItemsCount - removeToDoCount - completedToDO;
+    todoItemsCount -removeToDoCount - completedToDO;
+  console.log("todoitemscount", todoItemsCount);
+  console.log("removetodocount", removeToDoCount);
+  console.log("completedtodo", completedToDO);
 }
 elementCount();
 
@@ -194,19 +207,19 @@ function clearCompleted() {
     }
   }
 }
-// }
+
 CLEAR.addEventListener("click", clearCompleted);
 ACTIVE.addEventListener("click", clearCompleted);
 
 //-----Show Completed Button ----//
 function showCompleted() {
-
   for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
-    console.log(TODOLISTGLOBAL[i])
-
     if (!TODOLISTGLOBAL[i].children[0].children[0].checked) {
       TODOLISTGLOBAL[i].style.display = "none";
-    } else if (TODOLISTGLOBAL[i].children[0].children[0].checked && TODOLISTGLOBAL[i].style.display == 'none') {
+    } else if (
+      TODOLISTGLOBAL[i].children[0].children[0].checked &&
+      TODOLISTGLOBAL[i].style.display == "none"
+    ) {
       TODOLISTGLOBAL[i].style.display = "flex";
     }
   }
@@ -217,11 +230,8 @@ COMPLETED.addEventListener("click", showCompleted);
 // -----Show All Button ----//
 
 function showAll() {
-
   for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
-    console.log(TODOLISTGLOBAL[i])
-      TODOLISTGLOBAL[i].style.display = "flex";
-
-}
+    TODOLISTGLOBAL[i].style.display = "flex";
+  }
 }
 ALL.addEventListener("click", showAll);
