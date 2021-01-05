@@ -154,25 +154,23 @@ function clickedBoxes() {
 }
 clickedBoxes();
 
+
+
 let removeToDoCount=0;
 function removeToDo() {
   document.getElementById("central-elements").addEventListener("click", (e) => {
-    if (e.target.className === "cross") {
-      for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
-        if (TODOLISTGLOBAL[i].children[0].children[0].checked) {
-          console.log(TODOLISTGLOBAL[i].children[0].children[0].checked);
+      if (e.target.className === "cross" && e.target.parentElement.children[0].children[0].checked) {
           e.target.parentElement.style.display = "none";
           
-         
-        } else if (!TODOLISTGLOBAL[i].children[0].children[0].checked) {
-          e.target.parentElement.style.display = "none";
-          // removeToDoCount+=1;
-          console.log(TODOLISTGLOBAL.length)
+          
+        } else if (e.target.className === "cross" && !e.target.parentElement.children[0].children[0].checked) {
+            //   e.target.parentElement.style.display = "none";
+            e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+              console.log(e.target.parentNode.parentNode)
+        //   removeToDoCount+=1;
           elementCount();
-        }
-      }
     }
-  });
+  })
 }
 removeToDo();
 
@@ -182,12 +180,7 @@ function elementCount() {
   let number = document.getElementById("items-left");
   let todoItemsCount = document.getElementById("central-elements")
     .childElementCount;
-  // let removeToDoCount = 0;
-  // for (let i = 0; i < TODOLISTGLOBAL.length; i++) {
-  //   if (TODOLISTGLOBAL[i].style.display == "none") {
-  //     removeToDoCount++;
-  //   }
-  // }
+
 
   number.childNodes[0].textContent =
     todoItemsCount -removeToDoCount - completedToDO;
