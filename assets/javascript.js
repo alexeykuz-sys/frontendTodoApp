@@ -2,8 +2,6 @@ const SUN = document.getElementById("sun");
 const MOON = document.getElementById("moon");
 const BGIMGLIGHT = document.getElementById("bg-image-light");
 const BGIMGDARK = document.getElementById("bg-image-dark");
-// const CROSS = document.querySelectorAll(".cross");
-// const checkboxes = document.querySelectorAll("input[name=checkbox]");
 const CLEAR = document.getElementById("clear-completed");
 const ALL = document.getElementById("all");
 const ACTIVE = document.getElementById("active");
